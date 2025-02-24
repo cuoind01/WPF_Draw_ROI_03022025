@@ -22,6 +22,8 @@ namespace WPF_Draw_ROI_03022025
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly DispatcherTimer timer2;
+        private const string CurrentUser = "cuoind01";
         public MainWindow()
         {
             InitializeComponent();
@@ -34,6 +36,18 @@ namespace WPF_Draw_ROI_03022025
             stsDisplay.Text = $"User: Khoa";
             ImageCanvas.RoiChanged += ImageCanvas_RoiChanged;
             UpdateTime();
+
+            InitializeContextMenu2();
+            timer2 = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            timer2.Tick += Timer_Tick;
+            timer2.Start();
+
+            userDisplay.Text = $"Current User's Login: {CurrentUser}";
+            roiCanvas.ROIUpdated += UpdateROIInfo;
+            UpdateTime2();
         }
 
         private void UpdateTime()
@@ -85,6 +99,72 @@ namespace WPF_Draw_ROI_03022025
         private void ClearROI_Click(object sender, RoutedEventArgs e)
         {
             ImageCanvas.ClearROI();
+        }
+
+        private void InitializeContextMenu2()
+        {
+            var menu = new ContextMenu();
+
+            var loadImageItem = new MenuItem { Header = "Load Image" };
+            loadImageItem.Click += LoadImage2_Click;
+
+            var addRoiMenu = new MenuItem { Header = "Add ROI" };
+            var addRectangleItem = new MenuItem { Header = "Rectangle" };
+            addRectangleItem.Click += (s, e) => roiCanvas.StartNewROI(ROIType.Rectangle);
+            var addEllipseItem = new MenuItem { Header = "Ellipse" };
+            addEllipseItem.Click += (s, e) => roiCanvas.StartNewROI(ROIType.Ellipse);
+
+            addRoiMenu.Items.Add(addRectangleItem);
+            addRoiMenu.Items.Add(addEllipseItem);
+
+            var clearRoiSingleItem = new MenuItem { Header = "Clear ROI" };
+            clearRoiSingleItem.Click += (s, e) => roiCanvas.ClearSingleROI();
+
+            var clearRoisItem = new MenuItem { Header = "Clear All ROIs" };
+            clearRoisItem.Click += (s, e) => roiCanvas.ClearROIs();
+
+            menu.Items.Add(loadImageItem);
+            menu.Items.Add(new Separator());
+            menu.Items.Add(addRoiMenu);
+            menu.Items.Add(clearRoiSingleItem);
+            menu.Items.Add(clearRoisItem);
+
+            roiCanvas.ContextMenu = menu;
+        }
+
+        private void Timer_Tick2(object sender, EventArgs e)
+        {
+            UpdateTime2();
+        }
+
+        private void UpdateTime2()
+        {
+            timeDisplay.Text = $"Current Date and Time (UTC): {DateTime.UtcNow:yyyy-MM-dd HH:mm:ss}";
+        }
+
+        private void UpdateROIInfo(ROI roi)
+        {
+            if (roi != null)
+            {
+                roiInfoDisplay.Text = $"ROI: Type={roi.Type}, X={roi.Bounds.X:F0}, Y={roi.Bounds.Y:F0}, W={roi.Bounds.Width:F0}, H={roi.Bounds.Height:F0}";
+            }
+            else
+            {
+                roiInfoDisplay.Text = "No ROI selected";
+            }
+        }
+
+        private void LoadImage2_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFileDialog
+            {
+                Filter = "Image files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp|All files (*.*)|*.*"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                roiCanvas.LoadImage(dialog.FileName);
+            }
         }
     }
 }

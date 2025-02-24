@@ -42,7 +42,30 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Draw Multi ROI">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
+                        <!-- Main Canvas Area -->
+                        <local:ROICanvas x:Name="roiCanvas" Grid.Row="0" Background="#442D2D2D"/>
+
+                        <!-- Status Bar -->
+                        <StatusBar Grid.Row="1" Background="#FF1E1E1E">
+                            <StatusBarItem>
+                                <TextBlock x:Name="timeDisplay" Foreground="White"/>
+                            </StatusBarItem>
+                            <Separator/>
+                            <StatusBarItem>
+                                <TextBlock x:Name="userDisplay" Foreground="White"/>
+                            </StatusBarItem>
+                            <Separator/>
+                            <StatusBarItem>
+                                <TextBlock x:Name="roiInfoDisplay" Foreground="White"/>
+                            </StatusBarItem>
+                        </StatusBar>
+                    </Grid>
                 </TabItem>
             </TabControl>
         </Grid>
