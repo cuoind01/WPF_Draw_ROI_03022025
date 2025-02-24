@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_Draw_ROI_03022025", "WPF_Draw_ROI_03022025\WPF_Draw_ROI_03022025.csproj", "{2582CF16-B2CB-4841-AF3A-B39C6A20A004}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_Draw_ROI_24022025", "WPF_Draw_ROI_24022025\WPF_Draw_ROI_24022025.csproj", "{831CCA0C-02C3-45C5-ACD7-8BCE8A55F0E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2582CF16-B2CB-4841-AF3A-B39C6A20A004}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2582CF16-B2CB-4841-AF3A-B39C6A20A004}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2582CF16-B2CB-4841-AF3A-B39C6A20A004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{831CCA0C-02C3-45C5-ACD7-8BCE8A55F0E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{831CCA0C-02C3-45C5-ACD7-8BCE8A55F0E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{831CCA0C-02C3-45C5-ACD7-8BCE8A55F0E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{831CCA0C-02C3-45C5-ACD7-8BCE8A55F0E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

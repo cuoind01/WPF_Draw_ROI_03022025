@@ -101,6 +101,7 @@ namespace WPF_Draw_ROI_03022025
             {
                 Vector delta = pos - lastMousePostion;
                 roiRectangle.Offset(delta.X, delta.Y);
+                Console.WriteLine(  delta.ToString());
                 lastMousePostion = pos;
             }
             else if (isResizing)
